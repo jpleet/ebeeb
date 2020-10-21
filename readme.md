@@ -4,18 +4,19 @@ A framework to simulate individual interactions and explore theoretical ecology 
 
 ## Introduction
 
-Nature is fascinating. From the ancient Greeks up until the mid 19th century, the prevailing Western philosophy believed nature to be in harmony &mdash; the perfect product of some creator. Evidence gathered by Darwin and others started to challenge the status quo, showing nature as dynamic and constantly changing (MAYR). Some of the best documentation of change came from Elton () who compiled historical fur pellet records from the Hudson Bay Company. Elton's findings depicted what First Nations and trappers long recognized in the boreal forest of Canada: the animal populations were not in balance, birth rates and death rates were not always equal, and the populations fluctuated every 7-10 years (Krebs). 
+Nature is fascinating. From the ancient Greeks up until the mid 19th century, the prevailing Western philosophy believed nature to be in harmony &mdash; the perfect product of some creator. Evidence gathered by Darwin and others started to challenge the status quo, showing nature as dynamic and constantly changing ([Mayr 1982](https://books.google.ca/books?id=pHThtE2R0UQC&lpg=PP1&dq=mayr&pg=PP1#v=onepage)). Some of the best documentation of change came from [Hewitt](https://en.wikipedia.org/wiki/Charles_Gordon_Hewitt) and [Elton](https://en.wikipedia.org/wiki/Charles_Sutherland_Elton) who compiled historical fur pellet records from the Hudson Bay Company. Elton's findings depicted what First Nations and trappers long recognized in the boreal forest of Canada: the animal populations were not in balance, birth rates and death rates were not always equal, and the populations fluctuated every 7-10 years ([Krebs et al. 2001](https://www.zoology.ubc.ca/~krebs/papers/314.pdf)). 
 
 ![elton](https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Milliers_fourrures_vendues_90_ans_odum_1953.jpg/640px-Milliers_fourrures_vendues_90_ans_odum_1953.jpg)
 
-To explain long-term population fluctuations, Lotka (ref) and Volterra (ref) simultaneously formulated equations of predator-prey dynamics that cycle at equilibrium. The growth in the predator (lynx) and prey (hare) populations hinge on each other: the prey population grows when there are few predators and the predator population grows when there are more prey, leading to cycles.
+To explain long-term population fluctuations, Lotka ([1920](https://www.pnas.org/content/6/7/410), [1926](https://www.jstor.org/stable/43430362?seq=1)) and Volterra ([1927](https://www.nature.com/articles/119012a0)) simultaneously formulated equations of predator-prey dynamics that cycle at equilibrium. The growth in the predator (lynx) and prey (hare) populations hinge on each other: the prey population grows when there are few predators and the predator population grows when there are more prey, leading to cycles.
 
 ![lotka-volterra cycles](https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Lotka_Volterra_dynamics.svg/640px-Lotka_Volterra_dynamics.svg.png)
 
 Both Lotka and Volterra borrowed concepts from chemistry to model the populations as well-mixed ideal gases following the law of mass action. Individuals are assumed to behave like randomly colliding gas particles and interact at a the rate proportional to the concentrations of the populations. A plethora of theory in EEB  &mdash; from predation and competition to epidemiological infection models &mdash; are population-level equations built on the law of mass action. Maybe there are some natural systems that act like well-mixed randomly colliding ideal gases, but most likely don't &mdash; most systems have some degree of patchiness or organisms sensing and reacting. 
 
-Theory in EEB needs to move away from these 100 year-old simple assumptions of mass action and start modelling more realistic non-random individual-level interactions. Ecology is often defined as the study of interactions between organisms and their environments &mdash; so theory should be able to model and examine different interaction strategies. 
-Moreover, linking mutable traits to the interaction strategies can capture evolutionary dynamics in long running simulations. There are some individual-based models (IBMs) that try to capture individual interactions and examine EEB, but they tend to be overly complex, computationally expensive, or very specific to certain systems (GRIMM). This is a framework to build IBMs that are simple, efficient, robust, and founded on classic models of EEB.  
+Theory in EEB needs to move away from these 100 year-old simple assumptions of mass action and start modelling more realistic non-random individual-level interactions. Ecology is often defined as the study of interactions between organisms and their environments &mdash; so theory should be able to model and examine different interaction strategies. Moreover, linking mutable traits to the interaction strategies can capture evolutionary dynamics in long running simulations. 
+
+There are some individual-based models (IBMs) that try to capture individual interactions and examine EEB, but they tend to be overly complex, computationally expensive, or very specific to certain systems ([Grimm and Railsback 2005](https://books.google.ca/books?id=IWKYDwAAQBAJ&lpg=PR15&ots=R4dzqExRIl&lr&pg=PR15#v=onepage&q&f=false)). This is a framework to build IBMs that are simple, efficient, robust, and founded on classic models of EEB.  
 
 This framework follows four principles:
 
@@ -24,13 +25,13 @@ This framework follows four principles:
 3. general and robust
 4. reproducible and distributed 
 
-The first principle is to <u>extend</u> and build on theory, not to start a whole new paradigm. For example, as a base model, a predator-prey system can be created in which all organisms act like randomly colliding ideal gases. This base IBM would have the same dynamics as the Lotka-Volterra equations. Extensions to the base model can be added to compare the dynamics of patchiness and non-random interactions.
+The first principle is to **extend** and build on theory, not to start a whole new paradigm. For example, as a base model, a predator-prey system can be created in which all organisms act like randomly colliding ideal gases. This base IBM would have the same dynamics as the Lotka-Volterra equations. Extensions to the base model can be added to compare the dynamics of patchiness and non-random interactions.
 
-Most models in EEB are population-level ordinary differential equations (ODE) that can be turned into <u>simple and efficient</u> population-level event-based models (EBMs). The rate parameters in the differential equations are converted into event probabilities over a short timespan. Much more detail can be found in RENSHAW (). In brief, population-level EBMs randomly draw event times from the event probabilities, jump to the next event, and perform the population event &mdash; no computation is wasted on simulating times with no events. These population-level EBMs add demographic stochasticity to the base differential equation dynamics (BARLETT, MAY). 
+Most models in EEB are population-level ordinary differential equations (ODE) that can be turned into **simple and efficient** population-level event-based models (EBMs). The rate parameters in the differential equations are converted into event probabilities over a short timespan. Much more detail can be found in Renshaw ([1993](https://archive.org/details/modellingbiologi0000rens)). In brief, population-level EBMs randomly draw event times from the event probabilities, jump to the next event, and perform the population event &mdash; no computation is wasted on simulating times with no events. These population-level EBMs add demographic stochasticity to the base differential equation dynamics ([Bartlett 1960](https://books.google.ca/books/about/Stochastic_Population_Models_in_Ecology.html?id=q6DwAAAAMAAJ&redir_esc=y), [May 1973](https://books.google.ca/books?id=BDA5-ipCLt4C&lpg=PP1&dq=Stability%20and%20complexity%20in%20model%20ecosystems&pg=PP1#v=onepage)). 
 
-A population-level EBM can further be extended into individual-level EBM (IEBM). This framework is inspired by the IEBM in Donalson & Dangelis (1999) termed HADES. Individuals are explicity modelled and assigned their own event times drawn from the population-level event probabilities. The most immediate event for each individual is stored in an *event_heap*. IEBMs pop the next event from the *event_heap* and call the individual to perform their event. After the event is carried out, new events are added to the *event_heap*.  With modern computers, it's now easier to program and simulate HADES and other IEBMs.
+A population-level EBM can further be extended into individual-level EBM (IEBM). This framework is inspired by the IEBM in Donalson & Nesbit ([1999](https://esajournals.onlinelibrary.wiley.com/doi/abs/10.1890/0012-9658%281999%29080%5B2492%3APDASSE%5D2.0.CO%3B2)) termed HADES. Individuals are explicity modelled and assigned their own event times drawn from the population-level event probabilities. The most immediate event for each individual is stored in an *event_heap*. IEBMs pop the next event from the *event_heap* and call the individual to perform their event. After the event is carried out, new events are added to the *event_heap*.  With modern computers, it's now easier to program and simulate HADES and other IEBMs.
 
-The framework is setup in pieces to be <u>robust and general</u>: different pieces can be combined to create all kinds of models. The code is written in Python and on GitHub to be <u>reproducible and distributed</u>. With Python, *NumPy* is used for efficient computing and the *datatable* package is used for manipulating dataframes of individuals. *Pandas* is a very popular Python dataframe package, but it's much slower when adding and removing rows. Ideally, *git* allows this framework to be distributed into branches and forks to keep new experimental systems all together.
+The framework is setup in pieces to be **robust and general**: different pieces can be combined to create all kinds of models. The code is written in Python and on GitHub to be **reproducible and distributed**. With Python, *NumPy* is used for efficient computing and the *datatable* package is used for manipulating dataframes of individuals. *Pandas* is a very popular Python dataframe package, but it's much slower when adding and removing rows. Ideally, *git* allows this framework to be distributed into branches and forks to keep new experimental systems all together.
 
 ## Overview
 
@@ -97,7 +98,7 @@ A single population more realistically grows logistically: fast rates at small s
 
 Notebook: [logistic growth](experiments/single_population/logistic_pop_growth.ipynb)
 
-In the first way, a population is assumed to not grow above a carrying capacity for whatever, implicit reason. Birth events are added to the event heap just like exponential growth, but the birth events now occur based on a probability $(1-N/K)$. The ODE and implicit IEBM have the same dynamics, again barring spatiotemporal noise in the IEBM.
+In the first way, a population is assumed to not grow above a carrying capacity for whatever, implicit reason. Birth events are added to the event heap just like exponential growth, but the birth events now occur based on a probability *(1-N/K)*. The ODE and implicit IEBM have the same dynamics, again barring spatiotemporal noise in the IEBM.
 
 The other way to model logistic growth is to explicitly create a limiting factor by not allowing individuals to overlap in space. The population growth dynamics depend on: 
 - the size of the individuals in the given environment (*radius*).
@@ -142,7 +143,7 @@ The next predator-prey model curbs growth with preconceptions to not allow for t
 
 Notebook: [Rosenzweig-MacArthur](experiments/consumer-resource/rosenzweig_macarthur.ipynb)
 
-The Rosenzweig-MacArthur model is a popular extenstion of the Lotka-Volterra equations that adds more realistic logistic growth in the prey population and intake rates in the predator population. It has some peculiar dynamics termed the paradox of enrichment. With all other parameters the same, increases in the carrying capacity of the prey (thus enriching the predator resouce), turns the predator population from stable equilibra to unstable limit cycles. The unstable limit cycles have troughs closer to extinction; so theoretically, more prey can increase the chance of extinction in a predator. 
+The Rosenzweig-MacArthur model is a popular extenstion of the Lotka-Volterra equations that adds more realistic logistic growth in the prey population and intake rates in the predator population. It has some peculiar dynamics termed the [paradox of enrichment](https://en.wikipedia.org/wiki/Paradox_of_enrichment). With all other parameters fixed, increases in the carrying capacity of the prey (thus enriching the predator resouce), turns the predator population from stable equilibra to unstable limit cycles. The unstable limit cycles have troughs closer to extinction; so theoretically, more prey can increase the chance of extinction in a predator. 
 
 Here's a sample bifurcation plot:
 
@@ -155,11 +156,11 @@ And these are example ODE and IEBM dynamics at a few of these carrying capacitie
 ![res_mac_4000](figures/rosenzweig_macarthur_4000.png)
 ![res_mac_8000](figures/rosenzweig_macarthur_8000.png)
 
-Notice simulations with larger $k$ end early as populations go extinct &mdash; this is the paradox of enrichment.
+Notice simulations with larger *k* end early as populations go extinct &mdash; this is the paradox of enrichment.
 
 ## Interferring Predator-Prey (IPP)
 
-The paradox of enrichment is contentious in ecology. From experiments, real systems don't seem to act this way. An alternative model where predator consumption depends on the ratio of prey and predators seems to capture the dynamics of experiments. However, these ratio-dependent predator-prey models have no underlying mechanism &mdash; it's just math &mdash; and there's no clear way to add in an IEBM. Though ratio-dependence is, to some degree, capturing interference between predator individuals. An IEBM can add interference by pausing predator individuals for some time when they interact.
+The paradox of enrichment is contentious in ecology. From experiments, real systems don't seem to act this way. An alternative model where predator consumption depends on the ratio of prey and predators seems to capture the dynamics of experiments. However, these [ratio-dependent predator-prey models](https://en.wikipedia.org/wiki/Arditi%E2%80%93Ginzburg_equations) have no underlying mechanism &mdash; it's just math &mdash; and there's no clear way to add in an IEBM. Though ratio-dependence is, to some degree, capturing interference between predator individuals ([Abrams & Ginzburg 2000](https://www.sciencedirect.com/science/article/abs/pii/S016953470001908X)). An IEBM can add interference by pausing predator individuals for some time when they interact.
 
 Notebook: [Interferring Predator-Prey](experiments/consumer-resource/interferring_predator_prey.ipynb)
 
@@ -177,7 +178,7 @@ Predators can no longer deplete their resouce when slowed down enough by each ot
 
 ## Hunting Interferring Predator-Prey (HIPP)
 
-Since the Lotka-Volterra example, the prey populations have been sessile for faster computations. Another benefit of stationary prey is that an *rtree* can store their locations and allow for quick neighbour searches. (The explicit logistic growth example also uses an *rtree* to place offspring in open space.) Predators can efficiently scan and change direction to the nearest prey.
+Since the Lotka-Volterra example, the prey populations have been sessile for faster computations. Another benefit of stationary prey is that an [*R-tree*](https://en.wikipedia.org/wiki/R-tree) can store their locations and allow for quick neighbour searches. (The explicit logistic growth example also uses an *R-tree* to place offspring in open space.) Predators can efficiently scan and change direction to the nearest prey.
 
 !PROCESSING!
 
@@ -189,6 +190,7 @@ Now with a (somewhat) stable HIPP system that is more realistic, cycles, and avo
 
 ## Ideas To Add
 - more comments
+- spell check
 - clean up some code
 - add dynamic Environment like temperature changes 
  - maybe wipe out events and reloads all new events back into heap
