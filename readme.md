@@ -96,7 +96,7 @@ Both models share the same dynamics for a given growth rate, except the IEBM has
 
 A single population more realistically grows logistically: fast rates at small sizes and slower rates as the population reaches its upper bounds, the carrying capacity. There are two ways to convert the logistic population growth ODE into an IEBM:  
 
-Notebook: [logistic growth](experiments/single_population/logistic_pop_growth.ipynb)
+Notebook: [logistic growth](experiments/single_population/logistic_growth.ipynb)
 
 In the first way, a population is assumed to not grow above a carrying capacity for whatever, implicit reason. Birth events are added to the event heap just like exponential growth, but the birth events now occur based on a probability *(1-N/K)*. The ODE and implicit IEBM have the same dynamics, again barring spatiotemporal noise in the IEBM.
 
