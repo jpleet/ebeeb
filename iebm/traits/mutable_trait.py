@@ -63,7 +63,7 @@ class MutableTrait(Trait):
         """
         
         actor_idx = self.population._get_actor_idx(actor_id)
-        if actor_idx in not None:
+        if actor_idx is not None:
             # return value at row number and trait column name
             return self.population.df[actor_idx, str(self)]
         else:

@@ -2,9 +2,9 @@ import numpy as np
 import heapq
 from tqdm import tqdm
 
-import warnings
-warnings.filterwarnings("error")
-import traceback
+#import warnings
+#warnings.filterwarnings("error")
+#import traceback
 
 class Simulation():
     """ Base individual-level model. Creates a simulation with a given
