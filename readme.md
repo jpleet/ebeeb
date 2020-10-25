@@ -212,16 +212,17 @@ And the predator radius starts changing:
 A lot of information is being stored at every event and the simulation becomes memory intensive. Dumping simulation data to disk during the runs would alleviate the issue and allow for longer runs. There's a few other future ideas/fixes I have listed below.
 
 
-## Ideas and Things To Do
+# Ideas and Things To Do
 - run many more simulations for each example in the cloud
 - clean up code and naming conventions
 - look into better mutable trait code
 - more comments
 - spell check
+- add sexual reproduction interactions
 - add dynamic Environment like temperature changes 
   - maybe wipe out events and reloads all new events back into heap
 - gui to select traits, events, population and run simulations
 
-## Conclusion
+# Conclusion
 
 IEBMs in this framework extends classic population-level EEB models to capture more realistic interactions and systems. There's a wide range of IEBMs that can be created from simpler models and should be investigated. Anyone interested in contributing can contact me and we can collaborate.
