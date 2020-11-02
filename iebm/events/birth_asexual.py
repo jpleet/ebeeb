@@ -130,7 +130,7 @@ class BirthAsexualEvent(Event):
         return new_events  
         
 
-class BirthAssxualDiffusionEvent(BirthAsexualEvent):
+class BirthAsexualDiffusionEvent(BirthAsexualEvent):
     
     def __init__(self, population, params):
         
