@@ -8,7 +8,7 @@ from scipy.spatial.distance import cdist
 from .base import Event
 
 
-class BirthEvent(Event):
+class BirthAsexualEvent(Event):
 
     def __init__(self, population, params):
         
@@ -70,8 +70,19 @@ class BirthEvent(Event):
 
                     new_id = self.population.id_count
                     
-                    new_traits = dict([(k, self.population.trait_dict[k].inherit_value(
-                        actor_id)) for k in self.population.trait_dict])
+                    # create new traits
+                    new_traits = {}
+                    for k in self.population.trait_dict:
+                        val = self.population.trait_dict[k].inherit_value(actor_id)
+                        
+                        # some traits can be gene arrays that need to be:
+                        # 1) stored in the trait gene dictionary
+                        # 2) decoded into a value
+                        if isinstance(val, np.ndarray):
+                            self.population.trait_dict[k].gene_dict[new_id] = val.copy()
+                            val = self.population.trait_dict[k].decode(val)
+                            
+                        new_traits[k] = val
               
                     if position_func is None:
                         x = np.random.rand() * self.population.xdim
@@ -89,8 +100,9 @@ class BirthEvent(Event):
                         self.population.df.rbind(new_df, force=True)
                         self.population.id_count += 1
                         self.population.size += 1
-
+                        
                         new_idx = self.population._get_actor_idx(new_id)
+                        
                         for k in new_traits:
                             val = new_traits[k]
                             self.population.df[new_idx, str(k)] = val
@@ -118,7 +130,7 @@ class BirthEvent(Event):
         return new_events  
         
 
-class BirthDiffusionEvent(BirthEvent):
+class BirthAssxualDiffusionEvent(BirthAsexualEvent):
     
     def __init__(self, population, params):
         

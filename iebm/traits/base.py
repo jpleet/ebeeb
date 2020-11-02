@@ -16,6 +16,8 @@ class Trait(ABC):
             self.track = params['track']
         else:
             self.track = False
+            
+        self.gene_dict = {}
 
     @abstractmethod
     def get_value(self, actor_id):

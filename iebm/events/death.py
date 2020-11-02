@@ -100,7 +100,12 @@ class DeathEvent(Event):
             # call trigger first, before removing individual
             if self.triggers:
                 new_events += self.triggers(params)
-                
+            
+            # remove individual from any genetic trait dictionaries
+            for k in self.population.trait_dict:
+                if len(self.population.trait_dict[k].gene_dict) > 0:
+                    del self.population.trait_dict[k].gene_dict[actor_id]
+            
             # remove row with id
             del self.population.df[actor_idx, :]
             # decrease population count
